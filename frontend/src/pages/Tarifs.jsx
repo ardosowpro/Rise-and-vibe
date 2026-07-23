@@ -14,7 +14,7 @@ export default function Tarifs() {
         title="Nos tarifs"
         subtitle={
           pricing.isPromo
-            ? `Période promo en cours — ${pricing.endLabel.charAt(0).toLowerCase()}${pricing.endLabel.slice(1)}.`
+            ? `Période promo en cours - ${pricing.endLabel.charAt(0).toLowerCase()}${pricing.endLabel.slice(1)}.`
             : "Tarifs standards du studio."
         }
       />

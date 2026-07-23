@@ -45,7 +45,7 @@ const VISIBLE_STATUSES = ["pending", "confirmed", "blocked"];
 function displayName(r) {
   return r.status === "blocked"
     ? (r.service || "").trim() || "Bloqué"
-    : `${r.first_name || ""} ${r.last_name || ""}`.trim() || r.service || "—";
+    : `${r.first_name || ""} ${r.last_name || ""}`.trim() || r.service || "-";
 }
 
 export default function Agenda() {

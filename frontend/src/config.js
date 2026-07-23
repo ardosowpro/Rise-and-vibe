@@ -69,7 +69,7 @@ export const config = {
       description: "La finition finale, prête pour toutes les plateformes.",
     },
   ],
-  // Clients / partenaires — section « Ils nous ont fait confiance ».
+  // Clients / partenaires - section « Ils nous ont fait confiance ».
   // Dépose les logos dans public/logos/ ; sans image, un badge texte est affiché.
   // Galerie de la page Studio : nombre de photos affichées avant le bouton « Voir plus »
   // (mettre un grand nombre, ex. 99, pour tout afficher d'office)

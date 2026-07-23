@@ -66,7 +66,7 @@ function SummaryRow({ label, value, capitalize = false }) {
     <div className="flex items-center justify-between gap-4">
       <dt className="text-white/50">{label}</dt>
       <dd className={`text-right font-medium text-white ${capitalize ? "capitalize" : ""}`}>
-        {value || "—"}
+        {value || "-"}
       </dd>
     </div>
   );
@@ -615,7 +615,7 @@ export default function Reserver() {
                   <SummaryRow
                     label="Créneau souhaité"
                     value={
-                      date && start ? `${formatDateShort(date)} · ${formatHour(start)}` : "—"
+                      date && start ? `${formatDateShort(date)} · ${formatHour(start)}` : "-"
                     }
                     capitalize
                   />
@@ -624,10 +624,10 @@ export default function Reserver() {
                 <>
                   <SummaryRow label="Formule" value="Session à l'heure" />
                   <SummaryRow label="Ingénieur" value={engineer} />
-                  <SummaryRow label="Date" value={date ? formatDateShort(date) : "—"} capitalize />
+                  <SummaryRow label="Date" value={date ? formatDateShort(date) : "-"} capitalize />
                   <SummaryRow
                     label="Heure"
-                    value={start ? `${formatHour(start)} · ${finalDuration}h` : "—"}
+                    value={start ? `${formatHour(start)} · ${finalDuration}h` : "-"}
                   />
                 </>
               )}
@@ -641,7 +641,7 @@ export default function Reserver() {
                   {isDevis
                     ? "Le studio te répond sur WhatsApp"
                     : pricing.isPromo
-                      ? `Grille promo — ${pricing.endLabel.charAt(0).toLowerCase()}${pricing.endLabel.slice(1)}`
+                      ? `Grille promo - ${pricing.endLabel.charAt(0).toLowerCase()}${pricing.endLabel.slice(1)}`
                       : "Tarifs standards"}
                 </p>
               </div>

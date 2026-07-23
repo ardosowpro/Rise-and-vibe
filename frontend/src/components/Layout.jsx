@@ -97,7 +97,7 @@ function Footer() {
             Contact
           </Link>
           <p className="text-white/30">
-            © {config.studioName} — Réalisé par{" "}
+            © {config.studioName} - Réalisé par{" "}
             <a
               href="https://didasco.co"
               target="_blank"
@@ -133,7 +133,7 @@ function AgendaLink() {
   return (
     <Link
       to="/agenda"
-      aria-label="Espace ingénieurs — agenda"
+      aria-label="Espace ingénieurs - agenda"
       className="fixed right-3 top-3 z-40 flex items-center gap-1.5 rounded-full border border-white/10 bg-ink-900/70 px-3 py-1.5 text-xs font-medium text-white/50 backdrop-blur-md transition-colors hover:border-white/25 hover:text-white/90"
       style={{ marginTop: "env(safe-area-inset-top)" }}
     >

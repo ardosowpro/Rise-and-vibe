@@ -23,7 +23,7 @@ export default function Contact() {
       <SectionTitle
         eyebrow="Contact"
         title="On reste joignables"
-        subtitle="Le plus simple reste WhatsApp — on répond vite."
+        subtitle="Le plus simple reste WhatsApp - on répond vite."
       />
       <div className="mt-8 space-y-3">
         <Button variant="whatsapp" href={whatsappInfoLink()} fullWidth>
