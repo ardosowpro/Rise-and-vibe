@@ -124,7 +124,7 @@ export const config = {
     plugins: ["Waves", "UAD", "FabFilter"],
   },
   socials: {
-    instagram: "#",
+    instagram: "https://www.instagram.com/riseandvibestudio/",
     tiktok: "#",
     youtube: "#",
   },
