@@ -126,7 +126,7 @@ export const config = {
   socials: {
     instagram: "https://www.instagram.com/riseandvibestudio/",
     tiktok: "https://www.tiktok.com/@1dabeatz1",
-    youtube: "#",
+    youtube: "https://www.youtube.com/@1dabeatz",
   },
 };
 
