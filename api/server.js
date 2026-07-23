@@ -7,7 +7,7 @@ const DB_NAME = process.env.DB_NAME || "riseandvibe";
 const AGENDA_CODE = process.env.AGENDA_CODE || "patiakh";
 
 const ACTIVE_STATUSES = ["pending", "confirmed", "blocked"];
-const ALL_STATUSES = ["pending", "confirmed", "blocked", "cancelled"];
+const ALL_STATUSES = ["pending", "confirmed", "blocked", "cancelled", "rejected"];
 
 const client = new MongoClient(MONGO_URL);
 await client.connect();

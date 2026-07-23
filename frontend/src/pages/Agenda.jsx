@@ -220,7 +220,7 @@ function AgendaBoard({ onLock }) {
                       key={r.id}
                       r={r}
                       onValidate={() => setStatus(r.id, "confirmed")}
-                      onReject={() => setStatus(r.id, "cancelled")}
+                      onReject={() => setStatus(r.id, "rejected")}
                       onOpenDay={() => openDay(r.date)}
                     />
                   ))}
@@ -256,7 +256,7 @@ function AgendaBoard({ onLock }) {
                   date={selectedDate}
                   items={byDate[selectedDate] || []}
                   onValidate={(id) => setStatus(id, "confirmed")}
-                  onReject={(id) => setStatus(id, "cancelled")}
+                  onReject={(id) => setStatus(id, "rejected")}
                 />
               )}
               {view === "week" && (
