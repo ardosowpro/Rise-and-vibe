@@ -105,7 +105,6 @@ export const config = {
     "/photos/studio-12.jpg",
     "/photos/studio-13.jpg",
     "/photos/studio-14.jpg",
-    "/photos/studio-15.jpg",
     "/photos/studio-16.jpg",
     "/photos/studio-17.jpg",
     "/photos/studio-18.jpg",
