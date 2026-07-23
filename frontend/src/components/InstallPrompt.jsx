@@ -21,20 +21,18 @@ function recentlyDismissed() {
   return Date.now() - t < DISMISS_DAYS * 24 * 3600 * 1000;
 }
 
-// Invitation à installer l'application :
-// - Android/Chrome : bouton natif via l'événement beforeinstallprompt
-// - iOS/Safari : mini-guide « Partager → Sur l'écran d'accueil »
+// Invitation à installer l'application, affichée dès la première ouverture :
+// - Android/Chrome : bouton natif via beforeinstallprompt dès qu'il est disponible,
+//   sinon guide « menu ⋮ → Ajouter à l'écran d'accueil »
+// - iOS/Safari : guide « Partager → Sur l'écran d'accueil »
 export default function InstallPrompt() {
   const [deferred, setDeferred] = useState(null);
-  const [showIos, setShowIos] = useState(false);
-  const [hidden, setHidden] = useState(false);
+  const [visible, setVisible] = useState(false);
 
   useEffect(() => {
     if (isStandalone() || recentlyDismissed()) return;
-    if (isIos()) {
-      const id = setTimeout(() => setShowIos(true), 2500);
-      return () => clearTimeout(id);
-    }
+    setVisible(true);
+    if (isIos()) return;
     const onPrompt = (e) => {
       e.preventDefault();
       setDeferred(e);
@@ -45,7 +43,7 @@ export default function InstallPrompt() {
 
   const dismiss = () => {
     localStorage.setItem(DISMISS_KEY, String(Date.now()));
-    setHidden(true);
+    setVisible(false);
   };
 
   const install = async () => {
@@ -54,9 +52,10 @@ export default function InstallPrompt() {
     const { outcome } = await deferred.userChoice;
     if (outcome !== "accepted") localStorage.setItem(DISMISS_KEY, String(Date.now()));
     setDeferred(null);
+    setVisible(false);
   };
 
-  if (hidden || (!deferred && !showIos)) return null;
+  if (!visible) return null;
 
   return (
     <div
@@ -73,10 +72,20 @@ export default function InstallPrompt() {
         <CloseIcon className="h-4 w-4" />
       </button>
       <div className="flex items-start gap-3 pr-6">
-        <img src="/icons/icon-192.png" alt="" className="h-12 w-12 rounded-xl" />
+        <img src="/icons/icon-192.png" alt="" className="h-12 w-12 rounded-xl bg-white" />
         <div className="min-w-0">
           <p className="font-semibold text-white">Installe l'app Rise and Vibe</p>
-          {deferred ? (
+          {isIos() ? (
+            <p className="mt-1 text-xs leading-relaxed text-white/70">
+              Ajoute l'app sur ton iPhone : touche{" "}
+              <span className="inline-flex items-center gap-1 rounded bg-white/10 px-1.5 py-0.5 text-white">
+                <ShareIosIcon className="h-3.5 w-3.5" />
+                Partager
+              </span>{" "}
+              dans Safari, puis{" "}
+              <span className="font-semibold text-white">« Sur l'écran d'accueil »</span>.
+            </p>
+          ) : deferred ? (
             <>
               <p className="mt-0.5 text-xs text-white/60">
                 Accès direct depuis ton écran d'accueil, même hors connexion.
@@ -88,13 +97,10 @@ export default function InstallPrompt() {
             </>
           ) : (
             <p className="mt-1 text-xs leading-relaxed text-white/70">
-              Ajoute l'app sur ton iPhone : touche{" "}
-              <span className="inline-flex items-center gap-1 rounded bg-white/10 px-1.5 py-0.5 text-white">
-                <ShareIosIcon className="h-3.5 w-3.5" />
-                Partager
-              </span>{" "}
-              dans Safari, puis{" "}
-              <span className="font-semibold text-white">« Sur l'écran d'accueil »</span>.
+              Ouvre le menu{" "}
+              <span className="rounded bg-white/10 px-1.5 py-0.5 font-semibold text-white">⋮</span>{" "}
+              de ton navigateur puis choisis{" "}
+              <span className="font-semibold text-white">« Ajouter à l'écran d'accueil »</span>.
             </p>
           )}
         </div>
