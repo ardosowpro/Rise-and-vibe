@@ -77,12 +77,12 @@ export default function InstallPrompt() {
           <p className="font-semibold text-white">Installe l'app Rise and Vibe</p>
           {isIos() ? (
             <p className="mt-1 text-xs leading-relaxed text-white/70">
-              Ajoute l'app sur ton iPhone : touche{" "}
+              Touche{" "}
               <span className="inline-flex items-center gap-1 rounded bg-white/10 px-1.5 py-0.5 text-white">
                 <ShareIosIcon className="h-3.5 w-3.5" />
                 Partager
               </span>{" "}
-              dans Safari, puis{" "}
+              puis{" "}
               <span className="font-semibold text-white">« Sur l'écran d'accueil »</span>.
             </p>
           ) : deferred ? (
