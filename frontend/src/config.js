@@ -4,7 +4,7 @@ export const config = {
   tagline: "Le studio où ta voix prend forme.",
   whatsappNumber: "221772023888",
   address: "Dakar, Sénégal",
-  mapsUrl: "https://maps.google.com/?q=Dakar+Senegal",
+  mapsUrl: "https://www.google.com/maps?q=14.756045,-17.250761",
   hours: {
     open: "10:00",
     close: "22:00",
