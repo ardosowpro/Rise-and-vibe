@@ -18,7 +18,7 @@ export default defineConfig({
         lang: "fr",
         scope: "/",
         description:
-          "Studio d'enregistrement à Dakar — réservez une session, masterclass et rencontres artistes.",
+          "Studio d'enregistrement à Dakar - réservez une session, masterclass et rencontres artistes.",
         theme_color: "#0a0a0f",
         orientation: "portrait",
         icons: [

@@ -135,3 +135,19 @@ export const LockIcon = (props) => (
     <path d="M8 10.5V7a4 4 0 0 1 8 0v3.5" />
   </Base>
 );
+
+export const DownloadIcon = (props) => (
+  <Base {...props}>
+    <path d="M12 4v11" />
+    <path d="m7 11 5 5 5-5" />
+    <path d="M5 20h14" />
+  </Base>
+);
+
+export const ShareIosIcon = (props) => (
+  <Base {...props}>
+    <path d="M12 3v12" />
+    <path d="m8 7 4-4 4 4" />
+    <rect x="5" y="10" width="14" height="11" rx="2" />
+  </Base>
+);

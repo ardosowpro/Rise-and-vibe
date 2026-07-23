@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import config from "../config.js";
+import InstallPrompt from "./InstallPrompt.jsx";
 import {
   HomeIcon,
   CalendarIcon,
@@ -152,6 +153,7 @@ export default function Layout({ children }) {
     <div className="flex min-h-[100dvh] flex-col">
       <main className="flex-1 pb-24">{children}</main>
       <Footer />
+      <InstallPrompt />
       <AgendaLink />
       <FloatingReserve />
       <BottomNav />
