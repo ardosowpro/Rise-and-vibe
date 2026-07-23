@@ -66,14 +66,28 @@ export default function Agenda() {
 function LockScreen({ onUnlock }) {
   const [code, setCode] = useState("");
   const [wrong, setWrong] = useState(false);
-  const submit = (e) => {
+  const [checking, setChecking] = useState(false);
+  // Le code est vérifié par le serveur : il n'apparaît nulle part dans le JS public
+  const submit = async (e) => {
     e.preventDefault();
-    if (code.trim() === config.agendaCode) {
-      localStorage.setItem(UNLOCK_KEY, "1");
-      setAgendaCode(code.trim());
-      onUnlock();
-    } else {
+    setChecking(true);
+    try {
+      const res = await fetch("/api/agenda/verify", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ code: code.trim() }),
+      });
+      if (res.ok) {
+        localStorage.setItem(UNLOCK_KEY, "1");
+        setAgendaCode(code.trim());
+        onUnlock();
+      } else {
+        setWrong(true);
+      }
+    } catch {
       setWrong(true);
+    } finally {
+      setChecking(false);
     }
   };
   return (

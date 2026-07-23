@@ -129,7 +129,6 @@ export const config = {
     tiktok: "#",
     youtube: "#",
   },
-  agendaCode: "patiakh",
 };
 
 export default config;
