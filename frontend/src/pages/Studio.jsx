@@ -3,7 +3,20 @@ import config from "../config.js";
 import Card from "../components/Card.jsx";
 import Button from "../components/Button.jsx";
 import SectionTitle from "../components/SectionTitle.jsx";
-import { CheckIcon, WhatsAppIcon } from "../components/icons.jsx";
+import {
+  CheckIcon,
+  WhatsAppIcon,
+  MicIcon,
+  LaptopIcon,
+  SlidersIcon,
+} from "../components/icons.jsx";
+
+// Groupes de matériel : titre, icône et liste depuis config.equipment
+const EQUIPMENT_GROUPS = [
+  { key: "daw", title: "Logiciels", Icon: LaptopIcon },
+  { key: "hardware", title: "Matériel", Icon: MicIcon },
+  { key: "plugins", title: "Plugins", Icon: SlidersIcon },
+];
 import { whatsappInfoLink } from "../lib/booking.js";
 
 // Photo avec repli en dégradé si l'image manque
@@ -48,16 +61,26 @@ export default function Studio() {
 
       <section className="mt-12 space-y-4">
         <SectionTitle eyebrow="Équipement" title="Le matériel" />
-        <Card className="p-5">
-          <ul className="grid gap-3">
-            {config.equipment.map((item, i) => (
-              <li key={i} className="flex items-start gap-3 text-sm text-white/80">
-                <CheckIcon className="mt-0.5 h-5 w-5 shrink-0 text-accent-bright" />
-                {item}
-              </li>
-            ))}
-          </ul>
-        </Card>
+        <div className="grid gap-3">
+          {EQUIPMENT_GROUPS.map(({ key, title, Icon }) => (
+            <Card key={key} className="p-5">
+              <div className="flex items-center gap-3">
+                <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-accent/15 text-accent-bright">
+                  <Icon className="h-5 w-5" />
+                </span>
+                <h3 className="font-semibold text-white">{title}</h3>
+              </div>
+              <ul className="mt-4 grid gap-2.5">
+                {(config.equipment[key] || []).map((item) => (
+                  <li key={item} className="flex items-start gap-3 text-sm text-white/80">
+                    <CheckIcon className="mt-0.5 h-4 w-4 shrink-0 text-accent-bright/70" />
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </Card>
+          ))}
+        </div>
       </section>
 
       <section className="mt-12 space-y-4">

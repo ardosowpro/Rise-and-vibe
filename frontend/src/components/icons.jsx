@@ -29,6 +29,27 @@ export const CalendarIcon = (props) => (
   </Base>
 );
 
+export const LaptopIcon = (props) => (
+  <Base {...props}>
+    <rect x="4.5" y="4.5" width="15" height="10.5" rx="1.5" />
+    <path d="M2.5 19h19M4.5 15l-1.5 4M19.5 15l1.5 4" />
+  </Base>
+);
+
+export const SlidersIcon = (props) => (
+  <Base {...props}>
+    <path d="M6 4v6M6 14v6M12 4v10M12 18v2M18 4v2M18 10v10" />
+    <path d="M4 12h4M10 16h4M16 8h4" />
+  </Base>
+);
+
+export const TagIcon = (props) => (
+  <Base {...props}>
+    <path d="M20.6 13.4 12 22 2 12V2h10l8.6 8.6a2 2 0 0 1 0 2.8Z" />
+    <circle cx="7.5" cy="7.5" r="1.5" />
+  </Base>
+);
+
 export const SparkIcon = (props) => (
   <Base {...props}>
     <path d="M12 3v6M12 15v6M3 12h6M15 12h6" />

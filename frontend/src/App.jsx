@@ -6,6 +6,7 @@ import Reserver from "./pages/Reserver.jsx";
 import Masterclass from "./pages/Masterclass.jsx";
 import Sessions from "./pages/Sessions.jsx";
 import Studio from "./pages/Studio.jsx";
+import Tarifs from "./pages/Tarifs.jsx";
 import Contact from "./pages/Contact.jsx";
 import Agenda from "./pages/Agenda.jsx";
 
@@ -20,6 +21,7 @@ function SiteRoutes() {
         <Route path="/masterclass" element={<Masterclass />} />
         <Route path="/sessions" element={<Sessions />} />
         <Route path="/studio" element={<Studio />} />
+        <Route path="/tarifs" element={<Tarifs />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="*" element={<Home />} />
       </Routes>

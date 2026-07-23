@@ -51,30 +51,3 @@ export function todayStr() {
   const d = String(now.getDate()).padStart(2, "0");
   return `${y}-${m}-${d}`;
 }
-
-// Le service est-il tarifé "par sons" (promo voix) ?
-export function isVoicePromo(service) {
-  return service?.pricing === "sons";
-}
-
-export function promoPrice(sons) {
-  return config.voicePromo.prices[sons] ?? null;
-}
-
-export function promoMaxSons() {
-  return config.voicePromo.maxSons;
-}
-
-export function promoSonsOptions() {
-  return Object.keys(config.voicePromo.prices)
-    .map(Number)
-    .sort((a, b) => a - b);
-}
-
-export function promoMinPrice() {
-  return Math.min(...Object.values(config.voicePromo.prices));
-}
-
-export function priceLabel(service) {
-  return isVoicePromo(service) ? `Promo dès ${formatPrice(promoMinPrice())}` : "Sur devis";
-}

@@ -7,6 +7,7 @@ import {
   ClockIcon,
   SparkIcon,
   MicIcon,
+  TagIcon,
   InstagramIcon,
   TikTokIcon,
   YouTubeIcon,
@@ -16,6 +17,7 @@ import {
 
 const navItems = [
   { to: "/", label: "Accueil", icon: HomeIcon, end: true },
+  { to: "/tarifs", label: "Tarifs", icon: TagIcon },
   { to: "/disponibilites", label: "Dispos", icon: ClockIcon },
   { to: "/reserver", label: "Réserver", icon: CalendarIcon },
   { to: "/masterclass", label: "Événements", icon: SparkIcon, match: ["/masterclass", "/sessions"] },

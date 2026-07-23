@@ -12,12 +12,39 @@ export const config = {
   },
   currency: "FCFA",
   minDurationHours: 2,
-  voicePromo: {
-    prices: {
-      1: 15000,
-      2: 20000,
+  // Grille tarifaire : promo active jusqu'à promoEndDate inclus (bascule auto le lendemain).
+  // Pour couper la promo avant la date : promoActive: false. Pour prolonger : changer promoEndDate.
+  pricing: {
+    promoActive: true,
+    promoEndDate: "2026-08-20",
+    promo: {
+      label: "Période promo",
+      note: "Promo applicable à partir de deux sons",
+      endLabel: "Jusqu'au 20 août",
+      packages: [
+        { id: "2sons", label: "Deux sons", price: 20000 },
+        { id: "3sons", label: "Trois sons", price: 40000 },
+        { id: "ep5", label: "EP 5 titres", price: 65000 },
+      ],
+      hourlyRate: 15000,
     },
-    maxSons: 2,
+    horsPromo: {
+      label: "Tarifs standards",
+      packages: [
+        { id: "1son", label: "Un son", price: 15000 },
+        { id: "2sons", label: "Deux sons", price: 30000 },
+        { id: "3sons", label: "Trois sons", price: 45000 },
+        { id: "ep5", label: "EP 5 titres", price: 125000 },
+      ],
+      hourlyRate: 20000,
+    },
+    surDevis: [
+      "Projet (plus de 5 titres)",
+      "Composition",
+      "Mixage",
+      "Mastering",
+      "Direction artistique",
+    ],
   },
   services: [
     {
@@ -42,6 +69,18 @@ export const config = {
       description: "La finition finale, prête pour toutes les plateformes.",
     },
   ],
+  // Clients / partenaires — section « Ils nous ont fait confiance ».
+  // Dépose les logos dans public/logos/ ; sans image, un badge texte est affiché.
+  clients: [
+    {
+      id: "lspf",
+      name: "Ligue Sénégalaise Professionnelle de Football",
+      logo: "/logos/lspf.png",
+    },
+    { id: "dolima", name: "Dolima", logo: "/logos/dolima.png" },
+    { id: "g3c", name: "G3C", country: "Italie", logo: "/logos/g3c.png" },
+    { id: "ker", name: "Kër Imagination", logo: "/logos/ker-imagination.png" },
+  ],
   masterclasses: [],
   sessions: [],
   team: [
@@ -54,14 +93,14 @@ export const config = {
     "/photos/studio-3.jpg",
     "/photos/studio-4.jpg",
   ],
-  equipment: [
-    "Cabine de prise traitée acoustiquement",
-    "Micro à condensateur professionnel",
-    "Préampli & interface audio haut de gamme",
-    "Monitoring de studio calibré",
-    "Casques de référence",
-    "Stations FL Studio & Pro Tools",
-  ],
+  equipment: {
+    daw: ["Logic Pro", "FL Studio"],
+    hardware: [
+      "Carte son Universal Audio Apollo Twin X",
+      "Micro Neumann TLM 102",
+    ],
+    plugins: ["Waves", "UAD", "FabFilter"],
+  },
   socials: {
     instagram: "#",
     tiktok: "#",

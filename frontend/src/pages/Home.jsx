@@ -3,8 +3,12 @@ import config from "../config.js";
 import Button from "../components/Button.jsx";
 import Card from "../components/Card.jsx";
 import SectionTitle from "../components/SectionTitle.jsx";
+import HeroSlideshow from "../components/HeroSlideshow.jsx";
+import ClientLogos from "../components/ClientLogos.jsx";
+import PricingBlocks, { PromoBadge } from "../components/PricingBlocks.jsx";
 import { CalendarIcon, SparkIcon, ArrowRightIcon } from "../components/icons.jsx";
-import { formatPrice, promoMinPrice, priceLabel } from "../lib/format.js";
+import { formatPrice } from "../lib/format.js";
+import { getActivePricing } from "../lib/pricing.js";
 
 function FeatureLink({ to, title, desc }) {
   return (
@@ -21,18 +25,13 @@ function FeatureLink({ to, title, desc }) {
 }
 
 export default function Home() {
+  const pricing = getActivePricing();
+  const minPackage = pricing.packages.reduce((a, b) => (b.price < a.price ? b : a));
   return (
     <div>
-      {/* Héro */}
+      {/* Héro avec diaporama des photos de sessions */}
       <section className="relative overflow-hidden">
-        <div
-          className="absolute inset-0 -z-10"
-          aria-hidden="true"
-          style={{
-            background:
-              "radial-gradient(120% 90% at 70% 0%, rgba(225,87,67,0.26), transparent 55%),radial-gradient(90% 70% at 10% 20%, rgba(178,58,41,0.20), transparent 60%),linear-gradient(180deg, #14141d 0%, #0a0a0f 70%)",
-          }}
-        />
+        <HeroSlideshow />
         <div
           className="absolute inset-0 -z-10 opacity-[0.15]"
           aria-hidden="true"
@@ -62,12 +61,16 @@ export default function Home() {
             <Button to="/disponibilites" variant="secondary" fullWidth>
               Voir les créneaux disponibles
             </Button>
-            <p className="text-center text-sm text-white/50">
-              <span className="block text-2xl font-extrabold uppercase tracking-widest text-accent-bright">
-                PROMOTION
-              </span>
-              Prise de voix — dès{" "}
-              <span className="font-semibold text-white">{formatPrice(promoMinPrice())}</span>
+            <p className="text-center text-sm text-white/60">
+              {pricing.isPromo && (
+                <span className="mb-1 block">
+                  <PromoBadge pricing={pricing} />
+                </span>
+              )}
+              Forfaits dès{" "}
+              <span className="font-semibold text-white">{formatPrice(minPackage.price)}</span>
+              {" · "}Session studio{" "}
+              <span className="font-semibold text-white">{formatPrice(pricing.hourlyRate)}</span>/h
             </p>
           </div>
         </div>
@@ -78,7 +81,7 @@ export default function Home() {
         <SectionTitle
           eyebrow="Nos prestations"
           title="Ce qu'on fait pour toi"
-          subtitle="Prise de voix en promo. Mixage et mastering sur devis."
+          subtitle="Enregistrement au forfait ou à l'heure. Mixage, mastering et projets sur devis."
         />
         <div className="grid gap-3">
           {config.services.map((service) => (
@@ -90,12 +93,37 @@ export default function Home() {
                 <h3 className="font-semibold text-white">{service.label}</h3>
                 <p className="mt-1 text-sm text-white/60">{service.description}</p>
                 <p className="mt-2 text-sm font-semibold text-accent-bright">
-                  {priceLabel(service)}
+                  {service.pricing === "sons"
+                    ? `Forfaits dès ${formatPrice(minPackage.price)}`
+                    : "Sur devis"}
                 </p>
               </div>
             </Card>
           ))}
         </div>
+      </section>
+
+      {/* Ils nous ont fait confiance */}
+      <ClientLogos />
+
+      {/* Tarifs */}
+      <section className="container-app mt-14 space-y-5">
+        <SectionTitle
+          eyebrow="Tarifs"
+          title="Des prix clairs"
+          subtitle={
+            pricing.isPromo
+              ? `Période promo en cours — ${pricing.endLabel.charAt(0).toLowerCase()}${pricing.endLabel.slice(1)}.`
+              : "Tarifs standards du studio."
+          }
+        />
+        <PricingBlocks />
+        <Link
+          to="/tarifs"
+          className="flex items-center justify-center gap-1.5 text-sm font-medium text-accent-bright hover:underline"
+        >
+          Voir la page tarifs <ArrowRightIcon className="h-4 w-4" />
+        </Link>
       </section>
 
       {/* Plus qu'un studio */}
