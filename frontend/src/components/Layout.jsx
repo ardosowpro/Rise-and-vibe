@@ -96,7 +96,17 @@ function Footer() {
           <Link to="/contact" className="text-accent-bright hover:underline">
             Contact
           </Link>
-          <p className="text-white/30">© {config.studioName}</p>
+          <p className="text-white/30">
+            © {config.studioName} — Réalisé par{" "}
+            <a
+              href="https://didasco.co"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-white/50 transition-colors hover:text-accent-bright"
+            >
+              Didasco
+            </a>
+          </p>
         </div>
       </div>
     </footer>
