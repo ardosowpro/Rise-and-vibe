@@ -35,7 +35,8 @@ function Slide({ photo, visible, eager }) {
 // Diaporama d'arrière-plan du héro : fondu enchaîné lent, boucle,
 // image fixe si prefers-reduced-motion.
 export default function HeroSlideshow() {
-  const photos = config.studioPhotos || [];
+  // Le diaporama se limite aux premières photos pour ne pas alourdir la page
+  const photos = (config.studioPhotos || []).slice(0, 6);
   const reduced = useMemo(supportsReducedMotion, []);
   const [index, setIndex] = useState(0);
 
