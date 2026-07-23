@@ -19,7 +19,13 @@ const EQUIPMENT_GROUPS = [
 ];
 import { whatsappInfoLink } from "../lib/booking.js";
 
-// Photo avec repli en dégradé si l'image manque
+// Chemin de la version WebP optimisée d'une photo (/photos/x.jpg → /photos/optimized/x.webp)
+function optimizedSrc(src) {
+  const m = src && src.match(/^(.*)\/([^/]+)\.(jpe?g|png)$/i);
+  return m ? `${m[1]}/optimized/${m[2]}.webp` : null;
+}
+
+// Photo avec version WebP légère et repli en dégradé si l'image manque
 function StudioPhoto({ src, className, alt, seed = 0 }) {
   const [failed, setFailed] = useState(false);
   if (!src || failed) {
@@ -33,19 +39,28 @@ function StudioPhoto({ src, className, alt, seed = 0 }) {
       />
     );
   }
+  const webp = optimizedSrc(src);
   return (
-    <img
-      src={src}
-      alt={alt}
-      loading="lazy"
-      onError={() => setFailed(true)}
-      className={`${className} object-cover`}
-    />
+    <picture>
+      {webp && <source srcSet={webp} type="image/webp" />}
+      <img
+        src={src}
+        alt={alt}
+        loading="lazy"
+        onError={() => setFailed(true)}
+        className={`${className} object-cover`}
+      />
+    </picture>
   );
 }
 
 export default function Studio() {
   const photos = config.studioPhotos || [];
+  const previewCount = config.galleryPreviewCount ?? 6;
+  const [expanded, setExpanded] = useState(false);
+  const galleryPhotos = photos.length > 1 ? photos.slice(1) : [0, 1, 2];
+  const visiblePhotos = expanded ? galleryPhotos : galleryPhotos.slice(0, previewCount);
+  const hiddenCount = galleryPhotos.length - visiblePhotos.length;
   return (
     <div className="container-app pt-10">
       <SectionTitle
@@ -105,7 +120,7 @@ export default function Studio() {
       <section className="mt-12 space-y-4">
         <SectionTitle eyebrow="Galerie" title="En images" />
         <div className="grid grid-cols-2 gap-3">
-          {(photos.length > 1 ? photos.slice(1) : [0, 1, 2]).map((photo, i) => (
+          {visiblePhotos.map((photo, i) => (
             <StudioPhoto
               key={i}
               src={typeof photo === "string" ? photo : undefined}
@@ -115,6 +130,13 @@ export default function Studio() {
             />
           ))}
         </div>
+        {(hiddenCount > 0 || expanded) && (
+          <div className="text-center">
+            <Button variant="ghost" onClick={() => setExpanded((v) => !v)}>
+              {expanded ? "Voir moins" : `Voir plus (${hiddenCount} photos)`}
+            </Button>
+          </div>
+        )}
       </section>
 
       <section className="mt-12">
